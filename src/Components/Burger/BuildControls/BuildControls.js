@@ -3,10 +3,10 @@ import styles from './BuildControls.css'
 import BuildControl from './BuildControl/BuildControl'
  
 const controls = [
-    { label : 'Salad', type : 'Salad'},
-    { label : 'Meat', type : 'Meat'},
-    { label : 'Bacon', type : 'Bacon'},
-    { label : 'Cheese', type : 'Cheese'}
+    { label : 'salad', type : 'salad'},
+    { label : 'meat', type : 'meat'},
+    { label : 'bacon', type : 'bacon'},
+    { label : 'cheese', type : 'cheese'}
 ]
 
 const BuildControls = (props) => (

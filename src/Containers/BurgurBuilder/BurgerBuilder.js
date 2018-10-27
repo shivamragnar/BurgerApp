@@ -7,6 +7,9 @@ import OrderSummary from '../../Components/Burger/OrderSummary/OrderSummary'
 import axios from '../../axios-orders'
 import Spinner from '../../Components/UI/Spinner/Spinner'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
+import CheckOut from '../CheckOut/Checkout';
+import {Route} from 'react-router-dom'
+
 
 const INGREDIENT_PRICES = {
         salad : 0.5,
@@ -32,7 +35,7 @@ class BurgerBuilder extends Component {
     componentDidMount(){
         axios.get('https://myburger-builder.firebaseio.com/ingredients.json')
         .then(response => {
-            console.log(response)
+            
             this.setState({ingredients:response.data})
         })
         .catch(error => {
@@ -89,34 +92,18 @@ class BurgerBuilder extends Component {
         this.setState({purchasing : false})
     }
     purchaseContinueHandler=()=>{
-       // alert('You will continue soon')
-       this.setState({loading:true})
-       const data = {
-           ingredients : this.state.ingredients,
-           price : this.state.totalPrice,
-           customer : {
-                    name : 'Shivam Sharma',
-                    address : {
-                        zipCode : 505050,
-                        state : 'Delhi',
-                        country : 'INDIA'
-                    },
-                    email : 'test-email.com'            
-            },
-            deliveryMethod : 'fastest'
-        }
-
-       axios.post('/orders.json', data)
-       .then(response => {
-          this.setState({loading:false})
-          this.modalHandler()
-       })
-       .catch(error => {
-        this.setState({loading:false})
-        this.modalHandler()
-       })
-        
-    }
+    
+          const orderParams = []
+          for (let i in this.state.ingredients) {
+              orderParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
+          }
+          orderParams.push('totalPrice=' + this.state.totalPrice)
+          const paramsData = orderParams.join('&')
+          this.props.history.push({
+              pathname : '/CheckOut',
+              search :'?'+paramsData
+          })
+    } 
 
 
     render(){

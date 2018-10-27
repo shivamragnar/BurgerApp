@@ -7,8 +7,6 @@ import OrderSummary from '../../Components/Burger/OrderSummary/OrderSummary'
 import axios from '../../axios-orders'
 import Spinner from '../../Components/UI/Spinner/Spinner'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
-import CheckOut from '../CheckOut/Checkout';
-import {Route} from 'react-router-dom'
 
 
 const INGREDIENT_PRICES = {

@@ -3,7 +3,7 @@ import Button from '../../../Components/UI/Button/Button'
 import styles from './ContactData.css'
 import axios from '../../../axios-orders'
 import Spinner from '../../../Components/UI/Spinner/Spinner'
-import { timingSafeEqual } from 'crypto';
+
 import {Redirect} from 'react-router-dom'
 
 
@@ -17,7 +17,8 @@ class ContactData extends Component {
             street : '',
             pinCode :'',
         },
-        loading : false
+        loading : false,
+        home : false
     }
 
     redirect = ()=>(<Redirect to='/' />)
@@ -44,9 +45,8 @@ class ContactData extends Component {
                axios.post('/orders.json', data)
                .then(response => {
                    console.log(response)
-                  this.setState({loading:false})
-                  console.log('ready to redirect')
-                  this.redirect()
+                  this.setState({loading:false, home:true})
+                  
                })
                .catch(error => {
                 this.setState({loading:false})
@@ -55,6 +55,10 @@ class ContactData extends Component {
     }
 
     render(){
+        let redirect = null
+        if(this.state.home){
+            redirect = <Redirect to='/' />
+        }
         let form = (<form>
                         <input className={styles.Input} type='text' name='name' placeholder='Your Name'  />
                         <input className={styles.Input} type='email' name='email' placeholder='Your Email' />
@@ -71,6 +75,7 @@ class ContactData extends Component {
             <div className={styles.ContactData}>
                 <h3>Please Enter Your Contact Details</h3>
                 {form}
+                {redirect}           
             </div>
         )
     }

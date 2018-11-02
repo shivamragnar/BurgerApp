@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import Button from '../../../Components/UI/Button/Button'
 import styles from './ContactData.css'
-import axios from '../../../axios-orders'
+
 import Spinner from '../../../Components/UI/Spinner/Spinner'
 import Input from '../../../Components/UI/Input/Input'
 
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
-import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+
 import * as  burgerBuilderActions from '../../../store/action/index'
 
 

@@ -1,6 +1,6 @@
 import * as actionTypes from '../action/actionTypes'
 import {updateObject} from '../utility'
-import { purchaseBurgerStart } from '../action/order';
+
 
 const initialState = {
     orders : [],
@@ -13,12 +13,13 @@ const purchaseInit = (state, action) => {
     return updateObject(state, {purchasing : false})
 }
 
-const purchseBurgerStart = (state, action) => {
+const purchaseBurgerStart = (state, action) => {
     return updateObject(state, {loading : true})
 }
 
 const purchaseBurgerSuccess = (state, action) => {
     const newOrder = updateObject(state, { ...action.orderData, id : action.orderId})
+    
         const updatedState = {
             orders : state.orders.concat(newOrder),
             loading : false,
